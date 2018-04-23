@@ -73,8 +73,13 @@ public class TicTacToeGamePlayTest {
           game.mark(move);
         }
 
+        connectionCheckWinner(connectionPlayerOne);
+        connectionCheckWinner(connectionPlayerTwo);
+    }
+
+    private void connectionCheckWinner(Connection connection) {
         ArgumentCaptor<TicTacToeGame.WinnerValue> argument = ArgumentCaptor.forClass(TicTacToeGame.WinnerValue.class);
-        verify(connectionPlayerOne).sendEvent(eq(TicTacToeGame.EventType.GAME_OVER), argument.capture());
+        verify(connection).sendEvent(eq(TicTacToeGame.EventType.GAME_OVER), argument.capture());
         TicTacToeGame.WinnerValue event = argument.getValue();
 
         if( null == winner) {
@@ -84,18 +89,4 @@ public class TicTacToeGamePlayTest {
             assertThat(event.player, is(winner));
         }
     }
-    /// play
-
-//        game.mark(0); // X
-//        game.mark(3); // O
-//        game.mark(1); // X
-//        game.mark(4); // O
-//        game.mark(2); // X -- win
-//
-//        ArgumentCaptor<TicTacToeGame.WinnerValue> argument = ArgumentCaptor.forClass(TicTacToeGame.WinnerValue.class);
-//        verify(connectionPlayerOne).sendEvent(eq(TicTacToeGame.EventType.GAME_OVER), argument.capture());
-//        TicTacToeGame.WinnerValue event = argument.getValue();
-//
-//        assertThat(event, is(notNullValue()) );
-//        assertThat(event.player, is(playerOne));
 }
