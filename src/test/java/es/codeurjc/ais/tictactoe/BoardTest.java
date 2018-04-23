@@ -60,6 +60,8 @@ public class BoardTest {
     public void testSimpleGames() {
 
         // given an empty board -- see BeforeEach
+        System.out.println(Arrays.toString(moves));
+        System.out.println(operation);
 
         //when I play the given moves ...
         int index = 0;
@@ -70,17 +72,28 @@ public class BoardTest {
             index = (index + 1) % (labels.length);
         }
 
+        System.out.println(board.toString());
 
         //then one player should win or there should be draw
         if (operation == WIN_X) {
+            System.out.println("WIN_X");
+            System.out.println(Arrays.toString(board.getCellsIfWinner("X")));
+
             assertNotNull(board.getCellsIfWinner("X"));
             assertNull(board.getCellsIfWinner("O"));
             assertFalse(board.checkDraw());
         } else if (operation == WIN_O) {
+            System.out.println("WIN_O");
+            System.out.println(Arrays.toString(board.getCellsIfWinner("O")));
+
             assertNull(board.getCellsIfWinner("X"));
             assertNotNull(board.getCellsIfWinner("O"));
             assertFalse(board.checkDraw());
         } else {
+            System.out.println("DRAW");
+            System.out.println(Arrays.toString(board.getCellsIfWinner("X")));
+            System.out.println(Arrays.toString(board.getCellsIfWinner("O")));
+
             assertTrue(board.checkDraw());  // ERROR!!!!! There is no draw!!!
             assertNull(board.getCellsIfWinner("X"));
             assertNull(board.getCellsIfWinner("O"));
