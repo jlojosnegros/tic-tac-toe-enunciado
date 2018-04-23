@@ -64,4 +64,25 @@ public class Board {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append("|");
+		int index = 0;
+		for (Cell cell : cells) {
+			if (null == cell.value || false == cell.active)
+			{
+				s.append("-|");
+			} else {
+				s.append(cell.value);
+				s.append("|");
+			}
+			++index;
+			if (index == 3 || index ==6 )
+			{
+				s.append("\n|");
+			}
+		}
+		return s.toString();
+	}
 }
