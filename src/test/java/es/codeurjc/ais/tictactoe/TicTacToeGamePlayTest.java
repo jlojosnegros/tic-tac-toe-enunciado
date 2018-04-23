@@ -35,7 +35,7 @@ public class TicTacToeGamePlayTest {
                 { new int[] { 0,3,1,4,2}, playerOne},
                 { new int[] { 0,3,1,4,8,5}, playerTwo },
                 { new int[] { 4,0,7,1,2,6,3,5,8}, null},
-                { new int[] { 0,3,1,4,7,6,5,2,8}, playerTwo}, // Error because checkDraw returns true => checkDraw does not work when someone wins in the last move.
+                { new int[] { 0,3,1,4,7,6,5,2,8}, playerTwo}
         };
 
         return Arrays.asList(values);
