@@ -16,6 +16,7 @@ import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.assertFalse;
+import static org.assertj.core.api.Assertions.*;
 
 
 @RunWith(Parameterized.class)
@@ -31,7 +32,7 @@ public class BoardTest {
                 { new int[] { 0,3,1,4,2}, WIN_X },
                 { new int[] { 0,3,1,4,8,5}, WIN_O },
                 { new int[] { 4,0,7,1,2,6,3,5,8}, DRAW},
-                { new int[] { 0,3,1,4,7,6,5,2,8}, WIN_O}, // Error because checkDraw returns true => checkDraw does not work when someone wins in the last move.
+                { new int[] { 3,6,0,2,4,5,1,7,8}, WIN_X}, // Error because checkDraw returns true => checkDraw does not work when someone wins in the last move.
         };
 
         return Arrays.asList(values);
@@ -80,24 +81,24 @@ public class BoardTest {
             System.out.println("WIN_X");
             System.out.println(Arrays.toString(board.getCellsIfWinner("X")));
 
-            assertNotNull(board.getCellsIfWinner("X"));
-            assertNull(board.getCellsIfWinner("O"));
-            assertFalse(board.checkDraw());
+            assertThat(board.getCellsIfWinner("X")).isNotNull();
+            assertThat(board.getCellsIfWinner("O")).isNull();
+            assertThat(board.checkDraw()).isFalse();
         } else if (operation == WIN_O) {
             System.out.println("WIN_O");
             System.out.println(Arrays.toString(board.getCellsIfWinner("O")));
 
-            assertNull(board.getCellsIfWinner("X"));
-            assertNotNull(board.getCellsIfWinner("O"));
-            assertFalse(board.checkDraw());
+            assertThat(board.getCellsIfWinner("X")).isNull();
+            assertThat(board.getCellsIfWinner("O")).isNotNull();
+            assertThat(board.checkDraw()).isFalse();
         } else {
             System.out.println("DRAW");
             System.out.println(Arrays.toString(board.getCellsIfWinner("X")));
             System.out.println(Arrays.toString(board.getCellsIfWinner("O")));
 
-            assertTrue(board.checkDraw());
-            assertNull(board.getCellsIfWinner("X"));
-            assertNull(board.getCellsIfWinner("O"));
+            assertThat(board.checkDraw()).isTrue();
+            assertThat(board.getCellsIfWinner("X")).isNull();
+            assertThat(board.getCellsIfWinner("O")).isNull();
         }
     }
 }
