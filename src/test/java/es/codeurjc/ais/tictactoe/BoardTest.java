@@ -30,7 +30,8 @@ public class BoardTest {
         Object[][] values = {
                 { new int[] { 0,3,1,4,2}, WIN_X },
                 { new int[] { 0,3,1,4,8,5}, WIN_O },
-                { new int[] { 0,3,1,4,7,6,5,2,8}, DRAW },
+                { new int[] { 4,0,7,1,2,6,3,5,8}, DRAW},
+                { new int[] { 0,3,1,4,7,6,5,2,8}, WIN_O}, // Error because checkDraw returns true => checkDraw does not work when someone wins in the last move.
         };
 
         return Arrays.asList(values);
@@ -94,7 +95,7 @@ public class BoardTest {
             System.out.println(Arrays.toString(board.getCellsIfWinner("X")));
             System.out.println(Arrays.toString(board.getCellsIfWinner("O")));
 
-            assertTrue(board.checkDraw());  // ERROR!!!!! There is no draw!!!
+            assertTrue(board.checkDraw());
             assertNull(board.getCellsIfWinner("X"));
             assertNull(board.getCellsIfWinner("O"));
         }
