@@ -10,6 +10,8 @@ import org.junit.runners.Parameterized.Parameter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import java.net.MalformedURLException;
@@ -23,7 +25,7 @@ public class SeleniumSytemTest {
     public static Collection<Object[]> data () {
         Object[][] values = {
                 { new int[] { 4,0,7,1,2,6,3,5,8} },
-                { new int[] { 0,3,1,4,8,5} },
+                { new int[] { 0,3,1,4,7,5} },
                 { new int[] { 0,3,1,4,2} },
         };
 
@@ -111,8 +113,11 @@ public class SeleniumSytemTest {
         }
 
         index = (index+1)%drivers.length;
-        String result = drivers[index].switchTo().alert().getText();
+        WebDriverWait wait = new WebDriverWait(drivers[index], 30);
 
+        wait.until(ExpectedConditions.alertIsPresent());
+
+        String result = drivers[index].switchTo().alert().getText();
         System.out.println(result);
     }
 
