@@ -3,14 +3,35 @@ package es.codeurjc.ais.tictactoe;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+import org.junit.runners.Parameterized.Parameter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
 import java.net.MalformedURLException;
+import java.util.Arrays;
+import java.util.Collection;
 
+@RunWith(Parameterized.class)
 public class SeleniumSytemTest {
+
+    @Parameters
+    public static Collection<Object[]> data () {
+        Object[][] values = {
+                { new int[] { 4,0,7,1,2,6,3,5,8} },
+                { new int[] { 0,3,1,4,8,5} },
+                { new int[] { 0,3,1,4,2} },
+        };
+
+        return Arrays.asList(values);
+    }
+
+    @Parameter(0) public int[] moves;
+
 
     WebDriver driverPlayerOne;
     WebDriver driverPlayerTwo;
@@ -81,18 +102,18 @@ public class SeleniumSytemTest {
         goToHost(driverPlayerTwo);
         registerUser(namePlayerTwo, driverPlayerTwo);
 
+        WebDriver[] drivers = {driverPlayerOne, driverPlayerTwo};
+        int index = 0;
 
-        move(driverPlayerOne,0);
-        move(driverPlayerTwo,3);
+        for(int cell : moves) {
+            move(drivers[index], cell);
+            index = (index+1)%drivers.length;
+        }
 
-        move(driverPlayerOne, 1);
-        move(driverPlayerTwo, 4);
+        index = (index+1)%drivers.length;
+        String result = drivers[index].switchTo().alert().getText();
 
-        move(driverPlayerOne, 2);
-
-        String result = driverPlayerOne.switchTo().alert().getText();
-//
-//        System.out.println(result);
+        System.out.println(result);
     }
 
 }
