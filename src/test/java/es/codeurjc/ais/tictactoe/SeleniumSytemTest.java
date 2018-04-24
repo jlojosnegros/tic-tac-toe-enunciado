@@ -16,6 +16,7 @@ public class SeleniumSytemTest {
     WebDriver driverPlayerTwo;
 
     static String URL_SUT = "http://localhost:8080";
+    static String cellIdString = "cell-";
 
     @BeforeClass
     public static void beforeAll() {
@@ -61,6 +62,13 @@ public class SeleniumSytemTest {
         driver.get(URL_SUT);
     }
 
+    private void move(WebDriver driver, int cell) {
+        StringBuilder sb = new StringBuilder(cellIdString);
+        sb.append(cell);
+
+        driver.findElement(By.id(sb.toString())).click();
+    }
+
     @Test
     public void test() {
         // Exercise and verify
@@ -74,15 +82,17 @@ public class SeleniumSytemTest {
         registerUser(namePlayerTwo, driverPlayerTwo);
 
 
+        move(driverPlayerOne,0);
+        move(driverPlayerTwo,3);
 
-        driverPlayerOne.findElement(By.id("cell-0")).click();
-        driverPlayerTwo.findElement(By.id("cell-3")).click();
+        move(driverPlayerOne, 1);
+        move(driverPlayerTwo, 4);
 
-        driverPlayerOne.findElement(By.id("cell-1")).click();
-        driverPlayerTwo.findElement(By.id("cell-4")).click();
+        move(driverPlayerOne, 2);
 
-        driverPlayerOne.findElement(By.id("cell-2")).click();
-
+        String result = driverPlayerOne.switchTo().alert().getText();
+//
+//        System.out.println(result);
     }
 
 }
