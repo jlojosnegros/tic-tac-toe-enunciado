@@ -80,9 +80,8 @@ public class SeleniumSytemTest {
         driver.findElement(By.id(play_button)).click();
     }
 
-    private void goToHost(WebDriver driver) {
-        //driver.get("http://localhost:8080");
-        driver.get(URL_SUT);
+    private void goToHost(WebDriver driver, String url) {
+        driver.get(url);
     }
 
     private void move(WebDriver driver, int cell) {
@@ -98,10 +97,10 @@ public class SeleniumSytemTest {
         String namePlayerOne = "player One";
         String namePlayerTwo = "player Two";
 
-        goToHost(driverPlayerOne);
+        goToHost(driverPlayerOne,URL_SUT);
         registerUser(namePlayerOne, driverPlayerOne);
 
-        goToHost(driverPlayerTwo);
+        goToHost(driverPlayerTwo,URL_SUT);
         registerUser(namePlayerTwo, driverPlayerTwo);
 
         WebDriver[] drivers = {driverPlayerOne, driverPlayerTwo};
