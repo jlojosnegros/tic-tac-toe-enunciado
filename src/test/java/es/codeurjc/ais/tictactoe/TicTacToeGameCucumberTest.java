@@ -2,6 +2,9 @@ package es.codeurjc.ais.tictactoe;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
@@ -11,5 +14,17 @@ import org.junit.runner.RunWith;
         glue = {"es.codeurjc.ais.tictactoe"}
 )
 public class TicTacToeGameCucumberTest {
+    @BeforeClass
+    public static void beforeAll() {
+        System.out.println("BEFORE_ALL");
+        ChromeDriverManager.getInstance().setup();
+        WebApp.start();
+    }
+
+    @AfterClass
+    public static void afterAll() {
+        System.out.println("AFTER_ALL");
+        WebApp.stop();
+    }
 
 }
