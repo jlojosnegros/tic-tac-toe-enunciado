@@ -3,7 +3,7 @@ Feature: TicTacToe
 
 Scenario: Play a game and check the result.
     Given I have a tictactoe game at http://localhost:8080
-    And player_one is 'player one'
-    And player_two is 'player two'
+    And player_one is playerOne
+    And player_two is playerTwo
     When this moves are played [0,3,1,4,2]
-    Then the result is player_one wins
+    Then the result is playerOne wins!

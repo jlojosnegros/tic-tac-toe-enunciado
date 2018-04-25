@@ -17,6 +17,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static es.codeurjc.ais.tictactoe.SystemAndAcceptanceTestUtilities.*;
+import static junit.framework.TestCase.assertEquals;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class TicTacToePlayGameCucumberRunSteps {
 
@@ -54,13 +56,13 @@ public class TicTacToePlayGameCucumberRunSteps {
 
     }
 
-    @And("^player_one is '(-?.*)'$")
+    @And("^player_one is (-?[^ ]+)$")
     public void player_one_is(String nicknamePlayerOne) throws Throwable {
         this.nicknamePlayerOne = nicknamePlayerOne;
         registerUser(nicknamePlayerOne, driverPlayerOne);
     }
 
-    @And("^player_two is '(-?.*)'$")
+    @And("^player_two is (-?[^ ]+)$")
     public void player_two_is_player_two(String nicknamePlayerTwo) throws Throwable {
         this.nicknamePlayerTwo = nicknamePlayerTwo;
         registerUser(nicknamePlayerTwo, driverPlayerTwo);
@@ -85,16 +87,14 @@ public class TicTacToePlayGameCucumberRunSteps {
     }
 
 
-    @Then("^the result is (-?player_one wins|player_two wins|draw)$")
-    public void the_result_is(
-            @Transform(ResultTransformer.class) Results result) throws Throwable {
+    @Then("^the result is (-?[^ ]+ wins|draw)!$")
+    public void the_result_is(String result) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         WebDriverWait wait = new WebDriverWait(lastMove, 30);
-
         wait.until(ExpectedConditions.alertIsPresent());
 
         String alert_text = lastMove.switchTo().alert().getText();
-        System.out.println(alert_text);
+        assertThat(alert_text.toLowerCase()).startsWith(result.toLowerCase());
     }
 
 }
