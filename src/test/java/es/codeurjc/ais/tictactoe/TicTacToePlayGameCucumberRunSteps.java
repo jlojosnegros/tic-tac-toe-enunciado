@@ -1,7 +1,6 @@
 package es.codeurjc.ais.tictactoe;
 
 
-import cucumber.api.PendingException;
 import cucumber.api.Transform;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -10,12 +9,27 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.And;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static es.codeurjc.ais.tictactoe.SystemAndAcceptanceTestUtilities.*;
+
 public class TicTacToePlayGameCucumberRunSteps {
+
+    static String URL_SUT = "http://localhost:8080";
+    static String cellIdString = "cell-";
 
     WebDriver driverPlayerOne;
     WebDriver driverPlayerTwo;
+    WebDriver lastMove;
+    String nicknamePlayerOne;
+    String nicknamePlayerTwo;
+
+
     @Before
     public void beforeEach() {
         System.out.println("BEFORE_EACH");
@@ -29,29 +43,45 @@ public class TicTacToePlayGameCucumberRunSteps {
         releaseWebDriver(driverPlayerOne);
         releaseWebDriver(driverPlayerTwo);
     }
+
+
     @Given("^I have a tictactoe game at (-?.*)$")
     public void i_have_a_tictactoe_game_at(String url) throws Throwable {
+        System.out.println(url);
+
+        goToHost(driverPlayerOne, url);
+        goToHost(driverPlayerTwo, url);
+
     }
 
     @And("^player_one is '(-?.*)'$")
     public void player_one_is(String nicknamePlayerOne) throws Throwable {
-        System.out.println(nicknamePlayerOne);
-        // Write code here that turns the phrase above into concrete actions
-        //throw new PendingException();
+        this.nicknamePlayerOne = nicknamePlayerOne;
+        registerUser(nicknamePlayerOne, driverPlayerOne);
     }
 
     @And("^player_two is '(-?.*)'$")
     public void player_two_is_player_two(String nicknamePlayerTwo) throws Throwable {
-        System.out.println(nicknamePlayerTwo);
-        // Write code here that turns the phrase above into concrete actions
-        // throw new PendingException();
+        this.nicknamePlayerTwo = nicknamePlayerTwo;
+        registerUser(nicknamePlayerTwo, driverPlayerTwo);
     }
 
     @When("^this moves are played \\[(-?\\d+(?:[ \\t]*,[ \\t]*\\d+)+)\\]$")
     public void this_moves_are_played(
             @Transform(IntegerListTransformer.class) int[] moves) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new PendingException();
+        WebDriverWait waitToMove = new WebDriverWait(driverPlayerOne, 30);
+        WebElement cell_0 = driverPlayerOne.findElement(By.id("cell-0"));
+        waitToMove.until(ExpectedConditions.elementToBeClickable(cell_0));
+
+        WebDriver[] drivers = {driverPlayerOne, driverPlayerTwo};
+        int index = 0;
+        for (int cell : moves) {
+            move(drivers[index], cell);
+            index = (index+1)%drivers.length;
+        }
+
+        index = (index+1)%drivers.length;
+        lastMove = drivers[index];
     }
 
 
@@ -59,8 +89,12 @@ public class TicTacToePlayGameCucumberRunSteps {
     public void the_result_is(
             @Transform(ResultTransformer.class) Results result) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        System.out.println(result);
-        throw new PendingException();
+        WebDriverWait wait = new WebDriverWait(lastMove, 30);
+
+        wait.until(ExpectedConditions.alertIsPresent());
+
+        String alert_text = lastMove.switchTo().alert().getText();
+        System.out.println(alert_text);
     }
 
 }
