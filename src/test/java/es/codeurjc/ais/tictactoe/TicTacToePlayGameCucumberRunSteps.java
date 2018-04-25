@@ -23,12 +23,9 @@ public class TicTacToePlayGameCucumberRunSteps {
     static String URL_SUT = "http://localhost:8080";
     static String cellIdString = "cell-";
 
-    WebDriver driverPlayerOne;
-    WebDriver driverPlayerTwo;
-    WebDriver lastMove;
-    String nicknamePlayerOne;
-    String nicknamePlayerTwo;
-
+    private WebDriver driverPlayerOne;
+    private WebDriver driverPlayerTwo;
+    private WebDriver lastMove;
 
     @Before
     public void beforeEach() {
@@ -52,13 +49,11 @@ public class TicTacToePlayGameCucumberRunSteps {
 
     @And("^player_one is (-?[^ ]+)$")
     public void player_one_is(String nicknamePlayerOne) throws Throwable {
-        this.nicknamePlayerOne = nicknamePlayerOne;
         registerUser(nicknamePlayerOne, driverPlayerOne);
     }
 
     @And("^player_two is (-?[^ ]+)$")
     public void player_two_is_player_two(String nicknamePlayerTwo) throws Throwable {
-        this.nicknamePlayerTwo = nicknamePlayerTwo;
         registerUser(nicknamePlayerTwo, driverPlayerTwo);
     }
 
