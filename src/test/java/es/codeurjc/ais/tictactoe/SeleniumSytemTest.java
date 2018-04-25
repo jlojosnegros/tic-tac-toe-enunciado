@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static es.codeurjc.ais.tictactoe.SystemAndAcceptanceTestUtilities.*;
+
 @RunWith(Parameterized.class)
 public class SeleniumSytemTest {
 
@@ -39,7 +41,6 @@ public class SeleniumSytemTest {
     WebDriver driverPlayerTwo;
 
     static String URL_SUT = "http://localhost:8080";
-    static String cellIdString = "cell-";
 
     @BeforeClass
     public static void beforeAll() {
@@ -63,32 +64,6 @@ public class SeleniumSytemTest {
     public void afterEach() {
         releaseWebDriver(driverPlayerOne);
         releaseWebDriver(driverPlayerTwo);
-    }
-
-    private void releaseWebDriver(WebDriver driver) {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
-
-
-    private void registerUser(String playerNickName, WebDriver driver) {
-        String play_button = "startBtn";
-        String name_text = "nickname";
-
-        driver.findElement(By.id(name_text)).sendKeys(playerNickName);
-        driver.findElement(By.id(play_button)).click();
-    }
-
-    private void goToHost(WebDriver driver, String url) {
-        driver.get(url);
-    }
-
-    private void move(WebDriver driver, int cell) {
-        StringBuilder sb = new StringBuilder(cellIdString);
-        sb.append(cell);
-
-        driver.findElement(By.id(sb.toString())).click();
     }
 
     @Test
