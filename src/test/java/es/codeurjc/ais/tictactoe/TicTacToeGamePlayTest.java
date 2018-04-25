@@ -22,8 +22,8 @@ import static org.mockito.Mockito.*;
 @RunWith(Parameterized.class)
 public class TicTacToeGamePlayTest {
 
-    public static Player playerOne = new Player(1, "X", "player_one");
-    public static Player playerTwo = new Player(2, "O", "player_two");
+    private static Player playerOne = new Player(1, "X", "player_one");
+    private static Player playerTwo = new Player(2, "O", "player_two");
 
     @Parameters
     public static Collection<Object[]> data () {
