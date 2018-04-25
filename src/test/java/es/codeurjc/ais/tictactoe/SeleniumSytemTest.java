@@ -19,22 +19,27 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static es.codeurjc.ais.tictactoe.SystemAndAcceptanceTestUtilities.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @RunWith(Parameterized.class)
 public class SeleniumSytemTest {
 
+    static String namePlayerOne = "player One";
+    static String namePlayerTwo = "player Two";
+
     @Parameters
     public static Collection<Object[]> data () {
         Object[][] values = {
-                { new int[] { 4,0,7,1,2,6,3,5,8} },
-                { new int[] { 0,3,1,4,7,5} },
-                { new int[] { 0,3,1,4,2} },
+                { new int[] { 4,0,7,1,2,6,3,5,8}, "draw"},
+                { new int[] { 0,3,1,4,7,5}, namePlayerTwo},
+                { new int[] { 0,3,1,4,2} , namePlayerOne},
         };
 
         return Arrays.asList(values);
     }
 
     @Parameter(0) public int[] moves;
+    @Parameter(1) public String result;
 
 
     WebDriver driverPlayerOne;
@@ -69,8 +74,7 @@ public class SeleniumSytemTest {
     @Test
     public void test() {
         // Exercise and verify
-        String namePlayerOne = "player One";
-        String namePlayerTwo = "player Two";
+
 
         goToHost(driverPlayerOne,URL_SUT);
         registerUser(namePlayerOne, driverPlayerOne);
@@ -91,8 +95,10 @@ public class SeleniumSytemTest {
 
         wait.until(ExpectedConditions.alertIsPresent());
 
-        String result = drivers[index].switchTo().alert().getText();
+        String alert_result = drivers[index].switchTo().alert().getText();
+        System.out.println(alert_result);
         System.out.println(result);
+        assertThat(alert_result.toLowerCase()).startsWith(result.toLowerCase());
     }
 
 }
