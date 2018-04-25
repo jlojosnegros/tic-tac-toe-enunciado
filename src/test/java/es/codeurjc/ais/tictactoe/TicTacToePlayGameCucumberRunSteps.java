@@ -4,11 +4,10 @@ package es.codeurjc.ais.tictactoe;
 import cucumber.api.Transform;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.java.en.And;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static es.codeurjc.ais.tictactoe.SystemAndAcceptanceTestUtilities.*;
-import static junit.framework.TestCase.assertEquals;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class TicTacToePlayGameCucumberRunSteps {

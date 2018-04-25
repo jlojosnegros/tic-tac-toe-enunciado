@@ -5,14 +5,12 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 import org.junit.runners.Parameterized.Parameter;
-import org.openqa.selenium.By;
+import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 import java.net.MalformedURLException;
 import java.util.Arrays;
@@ -49,7 +47,6 @@ public class SeleniumSytemTest {
 
     @BeforeClass
     public static void beforeAll() {
-        //System.setProperty("webdriver.chrome.driver", "/home/feanaro/projects/tic-tac-toe-enunciado/chromedriver");
         ChromeDriverManager.getInstance().setup();
         WebApp.start();
     }

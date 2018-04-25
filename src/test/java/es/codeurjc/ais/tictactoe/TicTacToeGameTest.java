@@ -2,11 +2,10 @@ package es.codeurjc.ais.tictactoe;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
+
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 import static org.mockito.hamcrest.MockitoHamcrest.argThat;
 
 public class TicTacToeGameTest {
