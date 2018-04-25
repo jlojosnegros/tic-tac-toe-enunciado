@@ -43,19 +43,4 @@ public class TicTacToeGameTest {
         verify(connectionPlayerOne).sendEvent(eq(TicTacToeGame.EventType.JOIN_GAME), argThat(hasItems(playerOne, playerTwo)));
         verify(connectionPlayerTwo).sendEvent(eq(TicTacToeGame.EventType.JOIN_GAME), argThat(hasItems(playerOne, playerTwo)));
     }
-        /// play
-
-//        game.mark(0); // X
-//        game.mark(3); // O
-//        game.mark(1); // X
-//        game.mark(4); // O
-//        game.mark(2); // X -- win
-//
-//        ArgumentCaptor<TicTacToeGame.WinnerValue> argument = ArgumentCaptor.forClass(TicTacToeGame.WinnerValue.class);
-//        verify(connectionPlayerOne).sendEvent(eq(TicTacToeGame.EventType.GAME_OVER), argument.capture());
-//        TicTacToeGame.WinnerValue event = argument.getValue();
-//
-//        assertThat(event, is(notNullValue()) );
-//        assertThat(event.player, is(playerOne));
-
 }
