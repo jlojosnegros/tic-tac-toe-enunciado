@@ -96,8 +96,6 @@ public class SeleniumSytemTest {
         wait.until(ExpectedConditions.alertIsPresent());
 
         String alert_result = drivers[index].switchTo().alert().getText();
-        System.out.println(alert_result);
-        System.out.println(result);
         assertThat(alert_result.toLowerCase()).startsWith(result.toLowerCase());
     }
 

@@ -62,9 +62,6 @@ public class BoardTest {
     public void testSimpleGames() {
 
         // given an empty board -- see BeforeEach
-        System.out.println(Arrays.toString(moves));
-        System.out.println(operation);
-
         //when I play the given moves ...
         int index = 0;
         for (int move : moves) {
@@ -74,28 +71,17 @@ public class BoardTest {
             index = (index + 1) % (labels.length);
         }
 
-        System.out.println(board.toString());
 
         //then one player should win or there should be draw
         if (operation == WIN_X) {
-            System.out.println("WIN_X");
-            System.out.println(Arrays.toString(board.getCellsIfWinner("X")));
-
             assertThat(board.getCellsIfWinner("X")).isNotNull();
             assertThat(board.getCellsIfWinner("O")).isNull();
             assertThat(board.checkDraw()).isFalse();
         } else if (operation == WIN_O) {
-            System.out.println("WIN_O");
-            System.out.println(Arrays.toString(board.getCellsIfWinner("O")));
-
             assertThat(board.getCellsIfWinner("X")).isNull();
             assertThat(board.getCellsIfWinner("O")).isNotNull();
             assertThat(board.checkDraw()).isFalse();
         } else {
-            System.out.println("DRAW");
-            System.out.println(Arrays.toString(board.getCellsIfWinner("X")));
-            System.out.println(Arrays.toString(board.getCellsIfWinner("O")));
-
             assertThat(board.checkDraw()).isTrue();
             assertThat(board.getCellsIfWinner("X")).isNull();
             assertThat(board.getCellsIfWinner("O")).isNull();

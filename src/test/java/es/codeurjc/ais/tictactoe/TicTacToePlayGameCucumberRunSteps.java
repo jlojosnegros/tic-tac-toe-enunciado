@@ -34,14 +34,12 @@ public class TicTacToePlayGameCucumberRunSteps {
 
     @Before
     public void beforeEach() {
-        System.out.println("BEFORE_EACH");
         driverPlayerOne = new ChromeDriver();
         driverPlayerTwo = new ChromeDriver();
     }
 
     @After
     public void afterEach() {
-        System.out.println("AFTER_EACH");
         releaseWebDriver(driverPlayerOne);
         releaseWebDriver(driverPlayerTwo);
     }
@@ -49,8 +47,6 @@ public class TicTacToePlayGameCucumberRunSteps {
 
     @Given("^I have a tictactoe game at (-?.*)$")
     public void i_have_a_tictactoe_game_at(String url) throws Throwable {
-        System.out.println(url);
-
         goToHost(driverPlayerOne, url);
         goToHost(driverPlayerTwo, url);
 

@@ -16,14 +16,12 @@ import org.junit.runner.RunWith;
 public class TicTacToeGameCucumberTest {
     @BeforeClass
     public static void beforeAll() {
-        System.out.println("BEFORE_ALL");
         ChromeDriverManager.getInstance().setup();
         WebApp.start();
     }
 
     @AfterClass
     public static void afterAll() {
-        System.out.println("AFTER_ALL");
         WebApp.stop();
     }
 
