@@ -10,10 +10,8 @@ import cucumber.api.java.en.And;
 
 public class TicTacToePlayGameCucumberRunSteps {
 
-    @Given("^I have a tictactoe game$")
-    public void i_have_a_tictactoe_game() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new PendingException();
+    @Given("^I have a tictactoe game at (-?.*)$")
+    public void i_have_a_tictactoe_game_at(String url) throws Throwable {
     }
 
     @And("^player_one is '(-?.*)'$")
