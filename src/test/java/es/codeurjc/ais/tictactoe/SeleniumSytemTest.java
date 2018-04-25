@@ -22,8 +22,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @RunWith(Parameterized.class)
 public class SeleniumSytemTest {
 
-    static String namePlayerOne = "player One";
-    static String namePlayerTwo = "player Two";
+    private static String namePlayerOne = "player One";
+    private static String namePlayerTwo = "player Two";
 
     @Parameters
     public static Collection<Object[]> data () {
@@ -40,10 +40,8 @@ public class SeleniumSytemTest {
     @Parameter(1) public String result;
 
 
-    WebDriver driverPlayerOne;
-    WebDriver driverPlayerTwo;
-
-    static String URL_SUT = "http://localhost:8080";
+    private WebDriver driverPlayerOne;
+    private WebDriver driverPlayerTwo;
 
     @BeforeClass
     public static void beforeAll() {
@@ -57,7 +55,7 @@ public class SeleniumSytemTest {
     }
 
     @Before
-    public void beforeEach() throws MalformedURLException {
+    public void beforeEach() {
         driverPlayerOne = new ChromeDriver();
         driverPlayerTwo = new ChromeDriver();
     }
@@ -71,12 +69,11 @@ public class SeleniumSytemTest {
     @Test
     public void test() {
         // Exercise and verify
-
-
-        goToHost(driverPlayerOne,URL_SUT);
+        String URL_SUT = "http://localhost:8080";
+        goToHost(driverPlayerOne, URL_SUT);
         registerUser(namePlayerOne, driverPlayerOne);
 
-        goToHost(driverPlayerTwo,URL_SUT);
+        goToHost(driverPlayerTwo, URL_SUT);
         registerUser(namePlayerTwo, driverPlayerTwo);
 
         WebDriver[] drivers = {driverPlayerOne, driverPlayerTwo};
