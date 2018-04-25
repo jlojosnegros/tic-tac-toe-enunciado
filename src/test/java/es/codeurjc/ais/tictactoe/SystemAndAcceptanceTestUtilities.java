@@ -3,15 +3,15 @@ package es.codeurjc.ais.tictactoe;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SystemAndAcceptanceTestUtilities {
+class SystemAndAcceptanceTestUtilities {
 
-    static public void releaseWebDriver(WebDriver driver) {
+    static void releaseWebDriver(WebDriver driver) {
         if (driver != null) {
             driver.quit();
         }
     }
 
-    static public void registerUser(String playerNickName, WebDriver driver) {
+    static void registerUser(String playerNickName, WebDriver driver) {
         String play_button = "startBtn";
         String name_text = "nickname";
 
@@ -19,11 +19,11 @@ public class SystemAndAcceptanceTestUtilities {
         driver.findElement(By.id(play_button)).click();
     }
 
-    static public void goToHost(WebDriver driver, String url) {
+    static void goToHost(WebDriver driver, String url) {
         driver.get(url);
     }
 
-    static public void move(WebDriver driver, int cell) {
+    static void move(WebDriver driver, int cell) {
         String cellIdString = "cell-";
         StringBuilder sb = new StringBuilder(cellIdString);
         sb.append(cell);
